@@ -1,21 +1,29 @@
 const Header = (props) => {
   return (
-    <>
+    <header>
       <h1>
         {props.course}
       </h1>
-    </>
+    </header>
   )
 }
 
 const Content = (props) => {
+  const { parts } = props;
+  
+  return (
+    <div>
+      <Part part={parts[0].part} exercises={parts[0].exercises} />
+      <Part part={parts[1].part} exercises={parts[1].exercises} />
+      <Part part={parts[2].part} exercises={parts[2].exercises} />
+    </div>
+  )
+}
+
+const Part = (props) => {
   return (
     <>
-      { 
-        props.parts.map(part => (
-          <p key={part.part}>{part.part} {part.exercises}</p>
-        ))
-      }
+      <p>{props.part} {props.exercises}</p>
     </>
   )
 }
@@ -26,9 +34,9 @@ const Total = (props) => {
   }, 0)
 
   return (
-    <>
+    <div>
       <p>Number of exercises {total}</p>
-    </>
+    </div>
   )
 }
 
