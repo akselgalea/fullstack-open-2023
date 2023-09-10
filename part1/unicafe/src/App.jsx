@@ -1,6 +1,10 @@
 import { useState } from 'react'
 
-const Statistics = ({ good, neutral, bad }) => {
+const Statistics = (props) => {
+  /*
+    I added this because i already separated the statistics component in the previus exercise
+  */
+  const { good, neutral, bad } = props
   const all = good + neutral + bad
   const average = (good - bad) / all || 0
   const positive = good / all * 100 || 0
