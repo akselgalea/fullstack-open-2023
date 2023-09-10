@@ -1,11 +1,18 @@
 import { useState } from 'react'
 
 const Statistics = ({ good, neutral, bad }) => {
+  const all = good + neutral + bad
+  const average = (good - bad) / all || 0
+  const positive = good / all * 100 || 0
+
   return (
     <>
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
+      <p>all {all}</p>
+      <p>average {average}</p>
+      <p>positive {positive}%</p>
     </>
   )
 }
@@ -21,6 +28,15 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  const saveReview = {
+    'good': () => setGood(good + 1),
+    'neutral': () => setNeutral(neutral + 1),
+    'bad': () => setBad(bad + 1)
+  }
+  
+  // I wanted to try and call a function call as the handleClick event and also test the fuctions as object properties
+  const handleReview = (review) => saveReview[review]
+
   return (
     <>
       <div>
@@ -28,9 +44,9 @@ const App = () => {
           <h1>give feedback</h1>
         </header> 
 
-        <Button handleClick={() => setGood(good + 1)} text='good' />
-        <Button handleClick={() => setNeutral(neutral + 1)} text='neutral' />
-        <Button handleClick={() => setBad(bad + 1)} text='bad' />
+        <Button handleClick={handleReview('good')} text='good' />
+        <Button handleClick={handleReview('neutral')} text='neutral' />
+        <Button handleClick={handleReview('bad')} text='bad' />
       </div>
 
       <div>
