@@ -8,8 +8,13 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
-    const newPerson = { name: newName }
-    setPersons(persons.concat(newPerson))
+
+    if(persons.some(person => person.name === newName)) {
+      alert(`${newName} is already in the phonebook`)
+      return
+    }
+    
+    setPersons(persons.concat({ name: newName }))
     setNewName('')
   }
 
@@ -37,7 +42,7 @@ const App = () => {
         <header>
           <h2>Numbers</h2>
         </header>
-        
+
         <div>
           {persons.map(person => 
             <p key={person.name}>{person.name}</p>
