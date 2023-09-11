@@ -12,8 +12,10 @@ const App = () => {
   const [filter, setFilter] = useState('')
 
   useEffect(() => {
-    personService.getAll().then(res => {
-      setPersons(res.data)
+    personService.getAll().then(persons => {
+      setPersons(persons)
+    }).catch(error => {
+      console.error(error)
     })
   }, [])
 
