@@ -14,6 +14,12 @@ const App = () => {
   
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
+  const [mostVoted, setMostVoted] = useState(0)
+
+  const updateMostVoted = (votes) => {
+    const maxVotes = Math.max(...votes)
+    setMostVoted(votes.findIndex(anecdoteVotes => anecdoteVotes === maxVotes))
+  }
 
   const selectRandomAnecdote = () => {
     // Fixed this so it can return the last sentence as well
@@ -26,16 +32,30 @@ const App = () => {
     newVotes[selected] += 1
 
     setVotes(newVotes)
+    updateMostVoted(newVotes)
   }
 
   return (
+    <>
     <div>
+      <header>
+        <h1>Anecdote of the day</h1>
+      </header>
+      
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
 
       <button onClick={voteAnecdote}>vote</button>
       <button onClick={selectRandomAnecdote}>next anecdote</button>
     </div>
+
+    <div>
+      <header>
+        <h1>Anecdote with most votes</h1>
+      </header>
+      <p>{anecdotes[mostVoted]}</p>
+    </div>
+    </>
   )
 }
 
