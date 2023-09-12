@@ -3,6 +3,7 @@ import personService from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 
 // Saving newPersons
 const App = () => {
@@ -10,12 +11,14 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     personService.getAll().then(persons => {
       setPersons(persons)
     }).catch(error => {
       console.error(error)
+      sendNotification('error', 'Failed to fetch data')
     })
   }, [])
 
@@ -39,8 +42,10 @@ const App = () => {
 
     personService.create(newPerson).then(newPerson => {
       setPersons(persons.concat(newPerson))
+      sendNotification('success', `Added ${newPerson.name}`)
     }).catch(error => {
       console.log(error)
+      sendNotification('error', `Something went wrong`)
     })
 
     resetInput()
@@ -53,6 +58,10 @@ const App = () => {
 
     personService.update(person.id, newPerson).then(res => {
       setPersons(persons.map(person => person.id !== newPerson.id ? person : newPerson))
+      sendNotification('success', `Updated ${newPerson.name}`)
+    }).catch(error => {
+      console.error(error)
+      sendNotification('error', `Something went wrong`)
     })
   }
 
@@ -61,8 +70,10 @@ const App = () => {
     
     personService.destroy(id).then(res => {
       setPersons(persons.filter(person => person.id != id))
+      sendNotification('success', `Deleted ${name}`)
     }).catch(error => {
       console.error(error)
+      sendNotification('error', `Failed to delete ${name}`)
     })
   }
 
@@ -83,11 +94,21 @@ const App = () => {
     setNewNumber('')
   }
 
+  const sendNotification = (status, message) => {
+    setNotification({ message, status })
+    
+    setTimeout(() => {
+      setNotification(null)
+    }, 5000)
+  }
+
   return (
     <>
       <div>
         <header>
           <h2>Phonebook</h2>
+
+          <Notification notification={notification} />
         </header>
 
         <div>
