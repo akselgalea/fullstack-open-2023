@@ -1,6 +1,20 @@
+import weatherService from '../services/weather'
+import Weather from './Weather'
+import { useEffect, useState } from 'react'
+
 const Country = ({ country }) => {
   const { languages } = country
-  
+  const [weather, setWeather] = useState(null)
+
+  useEffect(() => {
+    weatherService.getWeatherByCapital(`${country.capital}`).then(res => {
+      setWeather(res)
+    }).catch(error => {
+      console.log(error)
+      setWeather()
+    })
+  }, [])
+
   return (
     <div>
       <header>
@@ -29,6 +43,15 @@ const Country = ({ country }) => {
       <div>
         <img src={country.flags.png} alt={country.flags.alt} />
       </div>
+
+      { weather && (
+        <Weather 
+          place={country.capital}
+          temperature={weather.temperature}
+          wind={weather.wind}
+          icon={weather.icon}
+        />
+      ) }
     </div>
   )
 }

@@ -29,7 +29,7 @@ const App = () => {
     setSelectedCountry(country)
   }
   
-  if(!countries) return <p>Loading...</p>
+  if(!countries) return <p>Loading countries...</p>
   
   return (
     <>
