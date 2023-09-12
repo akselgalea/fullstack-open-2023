@@ -35,7 +35,7 @@ const App = () => {
     }
 
     const newPerson = {
-      id: persons.length + 1,
+      id: persons[persons.length - 1].id + 1,
       name: newName,
       number: newNumber
     }
@@ -73,7 +73,10 @@ const App = () => {
       sendNotification('success', `Deleted ${name}`)
     }).catch(error => {
       console.error(error)
-      sendNotification('error', `Failed to delete ${name}`)
+      
+      if (error.response.status === 404) {
+        sendNotification('error', `Information of ${name} has already been removed from server`)
+      } else sendNotification('error', `Failed to delete ${name}`)
     })
   }
 
@@ -96,7 +99,7 @@ const App = () => {
 
   const sendNotification = (status, message) => {
     setNotification({ message, status })
-    
+
     setTimeout(() => {
       setNotification(null)
     }, 5000)
