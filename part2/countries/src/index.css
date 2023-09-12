@@ -1,0 +1,9 @@
+.country {
+  display: flex;
+  gap: 1ch;
+  align-items: center;
+}
+
+.country button {
+  height: 1.2rem;
+}

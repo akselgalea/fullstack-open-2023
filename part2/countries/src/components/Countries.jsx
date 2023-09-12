@@ -1,6 +1,6 @@
 import Country from "./Country"
 
-const Countries = ({ countries }) => {
+const Countries = ({ countries, handleClick }) => {
   if(!countries || countries.length === 0) return (
     <p>No matching countries found</p>
   )
@@ -16,7 +16,11 @@ const Countries = ({ countries }) => {
   return (
     <div>
       {countries.map(country => (
-        <p key={`${country.idd.root}-${country.idd.suffixes}`}>{country.name.common}</p>
+        <div className="country" key={`${country.idd.root}-${country.idd.suffixes}`}>
+          <p>{country.name.common}</p>
+
+          <button onClick={() => handleClick(country)}>show</button>
+        </div>
       ))}
     </div>
   )

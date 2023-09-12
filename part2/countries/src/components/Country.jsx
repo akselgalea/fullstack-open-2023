@@ -1,6 +1,6 @@
 const Country = ({ country }) => {
   const { languages } = country
-  console.log(languages)
+  
   return (
     <div>
       <header>
