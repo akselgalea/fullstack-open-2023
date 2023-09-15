@@ -22,7 +22,7 @@ const App = () => {
     })
   }, [])
 
-  const filteredPersons = !filter ? persons : persons.filter(person => person.name.toLowerCase().includes(filter))
+  const filteredPersons = !filter ? persons : persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
 
   const addPerson = (event) => {
     event.preventDefault()
