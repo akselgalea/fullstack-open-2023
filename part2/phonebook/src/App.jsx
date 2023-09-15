@@ -35,7 +35,6 @@ const App = () => {
     }
 
     const newPerson = {
-      id: persons[persons.length - 1].id + 1,
       name: newName,
       number: newNumber
     }
@@ -44,8 +43,7 @@ const App = () => {
       setPersons(persons.concat(newPerson))
       sendNotification('success', `Added ${newPerson.name}`)
     }).catch(error => {
-      console.log(error)
-      sendNotification('error', `Something went wrong`)
+      sendNotification('error', error.response.data.error)
     })
 
     resetInput()
