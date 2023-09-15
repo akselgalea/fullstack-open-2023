@@ -59,7 +59,7 @@ const App = () => {
       sendNotification('success', `Updated ${newPerson.name}`)
     }).catch(error => {
       console.error(error)
-      sendNotification('error', `Something went wrong`)
+      sendNotification('error', error.response.data.error)
     })
   }
 
