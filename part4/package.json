@@ -1,0 +1,30 @@
+{
+  "name": "blog-list",
+  "version": "1.0.0",
+  "description": "Fullstack Open Course Part 4 - Blog list",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "backend",
+    "blog",
+    "list",
+    "blog-list"
+  ],
+  "author": "Axel Galea",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.18.2",
+    "mongoose": "7.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "3.0.1",
+    "standard": "17.1.0"
+  },
+  "eslintConfig": {
+    "extends": "standard"
+  }
+}
