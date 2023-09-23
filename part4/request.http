@@ -1,0 +1,13 @@
+### Get all blogs
+GET http://localhost:3003/api/blogs
+
+### Create a blog
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "I love my wife",
+    "author": "Axel Galea",
+    "url": "google.com",
+    "likes": 1
+}
