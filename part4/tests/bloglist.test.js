@@ -52,6 +52,13 @@ describe('total likes', () => {
     }  
   ]
 
+  test('of empty array', () => {
+    const blogs = []
+    const result = listHelper.totalLikes(blogs)
+
+    expect(result).toBe(0)
+  })
+  
   test('of array with one blog', () => {
     const blogs = [blogList[0]]
     const result = listHelper.totalLikes(blogs)
@@ -59,12 +66,7 @@ describe('total likes', () => {
     expect(result).toBe(blogList[0].likes)
   })
 
-  test('of empty array', () => {
-    const blogs = []
-    const result = listHelper.totalLikes(blogs)
-
-    expect(result).toBe(0)
-  })
+  
 
   test('of multiple records', () => {
     const result = listHelper.totalLikes(blogList)
